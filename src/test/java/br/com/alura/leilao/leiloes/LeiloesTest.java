@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.alura.leilao.login.LoginPage;
@@ -12,6 +13,14 @@ import br.com.alura.leilao.login.LoginPage;
 public class LeiloesTest {
 
 	private LeiloesPage paginaDeLeiloes;
+	private CadastroLeilaoPage paginaDeCadastroDeLeilao;
+
+	@BeforeEach
+	public void beforeEach() {
+		LoginPage paginaDeLogin = new LoginPage();
+		this.paginaDeLeiloes = paginaDeLogin.efetuarLogin("fulano", "pass");
+		this.paginaDeCadastroDeLeilao = paginaDeLeiloes.carregarFormulario();
+	}
 
 	@AfterEach
 	public void afterEach() {
@@ -20,10 +29,6 @@ public class LeiloesTest {
 
 	@Test
 	public void deveriaCadastrarLeilao() {
-		LoginPage paginaDeLogin = new LoginPage();
-		this.paginaDeLeiloes = paginaDeLogin.efetuarLogin("fulano", "pass");
-		CadastroLeilaoPage paginaDeCadastroDeLeilao = paginaDeLeiloes.carregarFormulario();
-
 		String hoje = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		String nomeLeilao = "Leilao do dia " + hoje;
 		String valorInicial = "500.00";
@@ -31,6 +36,14 @@ public class LeiloesTest {
 		this.paginaDeLeiloes = paginaDeCadastroDeLeilao.cadastrarLeilao(nomeLeilao, valorInicial, hoje);
 
 		Assert.assertTrue(paginaDeLeiloes.isLeilaoCadastrado(nomeLeilao, valorInicial, hoje));
+	}
+
+	@Test
+	public void deveriaExecutarValidacaoAoCadastrarLeilaoComDadosInvalidos() {
+		this.paginaDeLeiloes = paginaDeCadastroDeLeilao.cadastrarLeilao("", "", "");
+
+		Assert.assertTrue(paginaDeLeiloes.isMensagensDeValidacaoVisiveis());
+		Assert.assertTrue(paginaDeLeiloes.isPaginaAtual());
 	}
 
 }
