@@ -29,11 +29,6 @@ public class LeiloesPage extends PageObject {
 		return colunaNome.getText().equals(nome) && colunaDataAbertura.getText().equals(dataAbertura) && colunaValorInicial.getText().equals(valorInicial);
 	}
 
-	public boolean isMensagensDeValidacaoVisiveis() {
-		String pageSource = this.browser.getPageSource();
-		return pageSource.contains("não deve estar em branco") && pageSource.contains("minimo 3 caracteres") && pageSource.contains("deve ser um valor maior de 0.1") && pageSource.contains("deve ser uma data no formato dd/MM/yyyy");
-	}
-
 	public boolean isPaginaAtual() {
 		return this.browser.getCurrentUrl().equals(URL_LIST);
 	}

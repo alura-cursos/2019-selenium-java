@@ -43,8 +43,9 @@ public class LeiloesTest {
 	public void deveriaExecutarValidacaoAoCadastrarLeilaoComDadosInvalidos() {
 		this.paginaDeLeiloes = paginaDeCadastroDeLeilao.cadastrarLeilao("", "", "");
 
-		Assert.assertTrue(paginaDeLeiloes.isMensagensDeValidacaoVisiveis());
+		Assert.assertFalse(paginaDeCadastroDeLeilao.isPaginaAtual());
 		Assert.assertTrue(paginaDeLeiloes.isPaginaAtual());
+		Assert.assertTrue(paginaDeCadastroDeLeilao.isMensagensDeValidacaoVisiveis());
 	}
 
 }
