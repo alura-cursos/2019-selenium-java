@@ -25,6 +25,7 @@ public class LeiloesTest {
 	@AfterEach
 	public void afterEach() {
 		this.paginaDeLeiloes.fechar();
+		this.paginaDeCadastroDeLeilao.fechar();
 	}
 
 	@Test

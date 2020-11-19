@@ -11,6 +11,7 @@ public class HelloWorldSelenium {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		WebDriver browser = new ChromeDriver();
 		browser.navigate().to("http://localhost:8080/leiloes");
+		browser.quit();
 	}
 
 }
