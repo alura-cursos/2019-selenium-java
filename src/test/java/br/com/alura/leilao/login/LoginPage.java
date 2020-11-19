@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import br.com.alura.leilao.leiloes.LeiloesPage;
+
 public class LoginPage {
 
 	private static final String URL_LOGIN = "http://localhost:8080/login";
@@ -17,13 +19,15 @@ public class LoginPage {
 		this.browser.navigate().to(URL_LOGIN);
 	}
 
-	public void preencherFormularioDeLogin(String username, String password) {
+	private void preencherFormularioDeLogin(String username, String password) {
 		browser.findElement(By.id("username")).sendKeys(username);
 		browser.findElement(By.id("password")).sendKeys(password);
 	}
 
-	public void efetuarLogin() {
+	public LeiloesPage efetuarLogin(String username, String password) {
+		this.preencherFormularioDeLogin(username, password);
 		browser.findElement(By.id("login-form")).submit();
+		return new LeiloesPage(browser);
 	}
 
 	public String getNomeUsuarioLogado() {

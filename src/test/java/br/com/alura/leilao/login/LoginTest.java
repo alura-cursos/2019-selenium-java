@@ -23,8 +23,7 @@ public class LoginTest {
 
 	@Test
 	public void deveriaEfetuarLoginComDadosValidos() {
-		paginaDeLogin.preencherFormularioDeLogin("fulano", "pass");
-		paginaDeLogin.efetuarLogin();
+		paginaDeLogin.efetuarLogin("fulano", "pass");
 
 		String nomeUsuarioLogado = paginaDeLogin.getNomeUsuarioLogado();
 		Assert.assertEquals("fulano", nomeUsuarioLogado);
@@ -33,8 +32,7 @@ public class LoginTest {
 
 	@Test
 	public void naoDeveriaEfetuarLoginComDadosInvalidos() {
-		paginaDeLogin.preencherFormularioDeLogin("invalido", "1233");
-		paginaDeLogin.efetuarLogin();
+		paginaDeLogin.efetuarLogin("invalido", "1233");
 
 		Assert.assertNull(paginaDeLogin.getNomeUsuarioLogado());
 		Assert.assertTrue(paginaDeLogin.isPaginaAtual());
